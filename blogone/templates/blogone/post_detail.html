@@ -1,0 +1,84 @@
+{% extends 'blogone/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container">
+ <div class="row">
+     <article class="col-md-8" style="margin-top:60px;">
+       <div class="panel  panel-default panel-body">
+
+         <div class="alert alert-info" style="width:100%">
+             <a class="mr-2" href="">By  {{post.author.get_full_name}}</a>
+                  <small class="text-muted" style="float:right"> on {{post.date_created|date:"F d, Y"}}</small>
+          </div>
+             <h4><b>{{post.title}}</b></h4>
+                  {% if post.post_image %}
+                        <p><img src="{{post.post_image.url}}" style="width:100%;height:auto"></p>
+                    {% else %}
+                        <p>no image</p>
+                    {% endif %}
+
+            <p class="article-content">{{post.content}}</p>
+                  {% if post.author == user %}
+                  <b> <a class="" href="{% url 'editpost' post.id %}"><span class="glyphicon glyphicon-edit" ></span> Edit</a></b>
+                   <b><a class="postdelete" style="margin-left:50px" href="{% url 'deletepost' post.id %}"><span class="glyphicon glyphicon-remove-circle" ></span> Delete</a></b>
+                  {% endif %}
+                         <hr>
+           <div style="float:right" >
+
+              <span class="glyphicon glyphicon-comment"></span>  {{comments.count}} Comment{{comments|pluralize }}&nbsp&nbsp
+              <a download="post" href=""><span class="glyphicon glyphicon-download-alt"></span> download</a> </p>
+           </div>
+       </div>
+
+    {% for comment in comments %}
+         <div class="panel panel-body"  style="background:#fff">
+           <p style="font-size:16px;"><i>{{comment.content}}</i></p>
+           <small class="text-muted" > <span class="glyphicon glyphicon-calendar"></span> {{comment.timestamp}}</small><br>
+            <small><span class="glyphicon glyphicon-user"></span> {{comment.Full_Name}}</small>
+
+           <div style="float:right">
+                <a href="" class="ml-5"> {{comment.replies.count}} replies</a>
+               <button name="button" class="reply-btn btn btn-dark ml-2" type="button" >reply</button>
+                {% if user.is_authenticated %}
+              <b><a class="commentdelete btn btn-danger"  href="{% url 'deletecomment' comment.id %}"><span class="glyphicon glyphicon-remove-circle" ></span> Delete</a></b>
+
+               {% endif %}
+             </div>
+
+         </div>
+     <div class="replied-comments form-group" style="display:none;background:#f2f2f2">
+         <h3>Leave replies</h3>
+        {% for reply in comment.replies.all %}
+          <blockquote class="panel" style="background:#e2e2e2">
+              <p> {{reply.content}}</p>
+              <p>{{reply.timestamp}}</p>
+              <footer> {{reply.Full_Name}}</footer>
+          </blockquote>
+         {% endfor %}
+        <form action="" method="post">
+            {% csrf_token %}
+             <input type="hidden" name="comment_id" value="{{comment.id}}">
+             {{comment_form.as_p}}
+                <button type="submit" class="btn btn-info" >Reply</button>
+        </form>
+    </div>
+
+ {%  endfor %}
+
+<!--comment form-->
+ <div class="panel panel-body">
+     <h4>Leave a Comment</h4>
+         <p>Your email adress will not be published.</p>
+             <form action="" method="post">
+                {% csrf_token %}
+                 {{comment_form|crispy}}
+                  <button type="submit" class="btn btn-success" >Comment</button>
+             </form>
+ </div>
+
+</article>
+ </div>
+</div>
+
+{% endblock content %}

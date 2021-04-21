@@ -1,0 +1,41 @@
+<html>
+    <head>
+          <title>Teck blog</title>
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+              {% load static %}
+
+        <link rel="stylesheet" href="{% static 'css3/css/bootstrap.css' %}"/>
+<!--    important script tags-->
+    <script src="{% static 'js/jquery-1.11.3.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+       <script>
+             $(document).ready(function(){
+         $(".reply-btn").click(function()
+         {
+           $(this).parent().parent().next(".replied-comments").fadeToggle()
+         });
+          $(".reply_msg").click(function()
+         {
+           $(this).parent().parent().next(".replied-message").fadeToggle()
+         });
+          $(".postdelete").click(function()
+          {
+          return confirm("Are you sure to delete this order?")
+          });
+
+          $(".commentdelete").click(function()
+          {
+          return confirm("Are you sure to delete this order?")
+          });
+
+         });
+       </script>
+    </head>
+        <body style="background:#f2f2f2">
+        {% include 'blogone/navbar.html' %}
+             {% block content %}
+
+            {% endblock content  %}
+          {% include 'blogone/footer.html' %}
+        </body>
+</html>

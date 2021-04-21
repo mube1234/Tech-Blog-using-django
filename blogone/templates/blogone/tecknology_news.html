@@ -1,0 +1,21 @@
+{% extends 'blogone/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+     <div class="panel panel-body col-md-10" style="margin-top:60px;">
+   <div class="">
+       <h4 class="panel panel-default panel-heading">Technology News...</span></h4>
+       {% if tech_news %}
+          {% for tech in tech_news %}
+                    <img src="{{tech.post_image.url}}" style="width:50px;height:50px;">
+                     <a href="{% url 'post_detail' tech.id %}">{{tech.title}}</a><hr>
+
+          {% endfor %}
+        <a href="">More</a>
+       {% else %}
+       <p><i>No Posts available right now</i></p>
+       {% endif %}
+     </div>
+</div>
+    </div>
+{% endblock content %}

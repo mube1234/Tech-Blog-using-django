@@ -1,0 +1,142 @@
+{% extends 'blogone/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" style="margin-top:20px">
+    <div class="row">
+        <div class="panel panel-body" style="margin-top:30px;color:#fff;background: linear-gradient(to right, red , yellow);">
+            <h3>Welcome to Techtimes  &reg</h3>
+            <p>New Information about Technology and Cyber Security <kbd>here</kbd></p>
+            <center><p><i><h4>The future is on!</h4></i></p></center>
+
+        </div>
+ {% for post in posts %}
+   <div class="col-md-4" style="margin-top:-20px">
+     <div class="panel  panel-default panel-body">
+       <img src="{{post.post_image.url}}" style="max-width:100%;height:auto"><br>
+        <p style="padding:5px;" class="text-muted"><i>By {{post.author.get_full_name}}</i>
+                <small class="text-muted" style="float:right;"><i class="glyphicon glyphicon-calendar"></i> {{post.date_created|date:"F d, Y"}}</small></p>
+       <p> <a href="{% url 'post_detail' post.id %}" style="font-family:serif"><b>{{post.title}}</b></a></p>
+        <p>{{post.content|linebreaksbr|slice:":200"}}...</p>
+        <a href="{% url 'post_detail' post.id %}">
+                   <div class="panel-footer">
+                       <div class="pull-left">Read More</div>
+                       <div class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
+                       <div class="clearfix"></div>
+                   </div>
+           </a>
+      </div>
+    </div>
+{% endfor %}
+</div> <!--    end row division-->
+<!--    pagination-->
+    <div class="row container" style="margin-top:-20px;">
+      <div class="panel  panel-default panel-body">
+    <div class=" pagination">
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+
+        {% endif %}
+    </span>
+</div>
+</div>
+</div>
+
+<!--    Second row to display a list of computer security based posts-->
+
+<div class="row">
+     <div class="panel  panel-default panel-body" style="color:#fff;background: linear-gradient(to right, #990073 , #ff0055);">
+            <h3>Computer Security and cyber Information</h3>
+            <p>Creating a Secure Cyber Ecosystem<kbd>here</kbd></p>
+        </div>
+{% for comsec_post in comsec_posts %}
+       <div class="col-md-6">
+         <div class="panel  panel-default panel-body" >
+            <img src="{{comsec_post.post_image.url}}" style="max-width:100%;height:auto;"><br>
+              <p  class="text-muted">By {{comsec_post.author.get_full_name}}
+              <small class="text-muted" style="float:right"><i class="glyphicon glyphicon-calendar"></i> {{comsec_post.date_created|date:"F d, Y"}}</small></p>
+             <p> <a href="{% url 'post_detail' comsec_post.id %}" style="font-family:serif"><b>{{comsec_post.title}}</b></a></p>
+             <p>{{comsec_post.content|linebreaksbr|slice:":400"}}</p>
+             <a href="{% url 'post_detail' comsec_post.id %}">
+                   <div class="panel-footer">
+                       <div class="pull-left">Read More</div>
+                       <div class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
+                       <div class="clearfix"></div>
+                   </div>
+           </a>
+      </div>
+    </div>
+ {% endfor %}
+
+</div>
+<!--    pagination two for computer seciurity-->
+    <!--    pagination-->
+    <div class="container row" style="margin-top:-20px;">
+      <div class="panel  panel-default panel-body">
+    <div class=" pagination">
+    <span class="step-links">
+        {% if comsec_posts.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ comsec_posts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ comsec_posts.number }} of {{ comsec_posts.paginator.num_pages }}.
+        </span>
+
+        {% if comsec_posts.has_next %}
+            <a href="?page={{ comsec_posts.next_page_number }}">next</a>
+
+        {% endif %}
+    </span>
+</div>
+</div>
+</div>
+    <!--    second row-->
+<div class="row">
+      <div class="col-md-5" >
+            <div class="panel  panel-danger">
+                <div class=" panel-heading" style="background:#660033;color:#fff;text-align:center">
+                    <h3>Recent Post</h3>
+                </div>
+            {% for recent_post in recent_posts %}
+                <div class="panel-body">
+                   <img src="{{recent_post.post_image.url}}"  style="width:50px;height:50px;float:left;margin-right:16px;">
+                   <p> <a href="{% url 'post_detail' recent_post.id %}">{{recent_post.title}}</a></p>
+               </div>
+            {% endfor %}
+                <a href="">More</a>
+                  <div class="clearfix"></div>
+
+    </div>
+</div>
+<div class="col-md-7">
+    <div class="panel panel-info">
+        <div class=" panel-heading">
+            <h4>Tips for you</h4>
+        </div>
+          {% for tips_post in tips_posts %}
+          <div class="panel-body">
+                <img src="{{tips_post.post_image.url}}" style="width:50px;height:50px;margin-right:16px;float:right">
+                <a href="{% url 'post_detail' tips_post.id %}" >{{tips_post.title}}</a>
+           </div>
+         {% endfor %}
+         <a href="" >More</a>
+
+    </div>
+    <div class="clearfix"></div>
+
+  </div>
+</div>
+</div>
+</div>
+{% endblock content %}
