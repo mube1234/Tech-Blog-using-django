@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6y--z(d%bb1xx3&wu=q4y6yrj&f7zh*cui(n21h2#k#^0jfg3i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['https://tecktimes.herokuapp.com']
+ALLOWED_HOSTS = ['tecktimes.herokuapp.com']
 
 
 # Application definition
@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK='bootstrap3'
 MEDIA_URL = '/images/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = '/static/'
 
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'),]
 
