@@ -1,0 +1,41 @@
+{% extends 'blogone/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+     <div class="panel panel-body col-md-10" style="margin-top:60px;">
+   <div class="">
+        <center ><h4 style="padding:10;background: #f2f2f2">Tips and Tricks</h4></center><hr>
+       {% if tips %}
+          {% for tip in tips %}
+                    <img src="{{tip.post_image.url}}" style="width:50px;height:50px;">
+                     <a href="{% url 'post_detail' tip.id %}">{{tip.title}}</a><hr>
+
+          {% endfor %}
+       {% else %}
+       <p><i>No Posts available right now</i></p>
+       {% endif %}
+
+
+<!--       -->
+    <div class=" pagination">
+    <span class="step-links">
+        {% if tips.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ tips.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ tips.number }} of {{ tips.paginator.num_pages }}.
+        </span>
+
+        {% if tips.has_next %}
+            <a href="?page={{ tips.next_page_number }}">next</a>
+            <a href="?page={{ tips.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+     </div>
+    </div>
+
+{% endblock content %}

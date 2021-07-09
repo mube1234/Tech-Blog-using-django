@@ -1,0 +1,22 @@
+{% extends 'blogone/base.html' %}
+{% load static %}
+{% block content %}
+ {% if user.is_authenticated %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 " style="margin-top:60px;">
+                  <div class="panel panel-primary">
+                    <p class="panel-heading">Total {{total_viewer}} views for your websites</p>
+                         {% for viewer in viewers %}
+                           <div class="panel-body">
+                           <h5  class="alert alert-success"><span class="glyphicon glyphicon-ok-sign"></span>
+                               Ip: {{viewer}}</h5>
+                            <h6 style="margin-left:30px;">{{viewer.timestamp}}</h6>
+                          </div>
+                        {% endfor %}
+                  </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

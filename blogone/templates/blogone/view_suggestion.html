@@ -1,0 +1,26 @@
+{% extends 'blogone/base.html' %}
+{% load static %}
+{% block content %}
+ {% if user.is_authenticated %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 " style="margin-top:60px;">
+              <h4 class="alert alert-info">Total {{total_suggest}} suggestion</h4>
+            {% for suggest in v_suggest %}
+               <div class="panel panel-body">
+                  <h4  class="alert alert-info"><span class="glyphicon glyphicon-ok-sign"></span> {{suggest.name}}</h4>
+                   <p style="margin-left:30px;"><i>{{suggest.email}}</i></p>
+                   <p style="margin-left:30px;"><i>{{suggest.message}}</i></p>
+                   <h6 style="margin-left:30px;">{{suggest.timestamp}}</h6>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                       <button style="float:right" type="submit">delete</button>
+                    <button style="float:right" type="submit">Replay</button>
+                   </form>
+               </div>
+              {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

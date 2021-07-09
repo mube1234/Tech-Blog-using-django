@@ -1,0 +1,21 @@
+{% extends 'blogone/base.html' %}
+{% block title %}Edit post{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style="margin-top:30px;">
+            <div class="col-md-8">
+                  <div class="panel panel-body" style="background:#f4f4f4">
+
+                   <center> <a href="" style="text-decoration:none">  <h3>Edit Post</h3></a></center>
+                      <form action="" method="post" enctype="multipart/form-data">
+                         {% csrf_token %}
+                           {{form.as_p}}<br>
+                           <button  type="submit" name="add" class="btn btn-info">Update</button>
+                        </form>
+                  </div>
+               </div>
+           </div>
+        </div>
+
+
+{% endblock content %}

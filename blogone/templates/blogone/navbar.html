@@ -1,0 +1,46 @@
+{% load static %}
+<nav class="navbar navbar-inverse  navbar-fixed-top" style="background:#660033">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar" type="button" data-toggle="collapse" data-target="#navbar">
+            <img src="{% static 'images/menuwhite.png' %}" style="width:30px;height:30px;">
+          </button>
+
+                 <a class="navbar-brand" href="{% url 'home' %}" style="color:#fff"><i>Teck Times </i></a>
+
+        </div>
+        <div class="navbar-collapse collapse" id="navbar" >
+          <div class="topmenu">
+            <ul class="nav navbar-nav navbar-right" >
+            <li><a href="{% url 'home' %}" style="color:#fff">Home</a></li>
+            <li><a href="{% url 'tech_news' %}" style="color:#fff">Technology</a></li>
+            <li><a href="{% url 'comsec_news' %}" style="color:#fff">Computer Security</a></li>
+<!--            admin-->
+       {% if request.user.is_staff %}
+            <li class="dropdown" >
+              <a style="color:#fff" class="dropdown-toggle" role="button" aria-expanded="false" aria-haspopup="true" href="#" data-toggle="dropdown">Manage<span class="caret"></span></a>
+              <ul class="dropdown-menu text-white" style="background:#660033">
+                <li><a href="{% url 'add_post' %}" style="color:#fff">Add Post</a></li>
+                <li><a href="{% url 'view_suggestion' %}" style="color:#fff">View Suggestion</a></li>
+                <li><a href="{% url 'view_viewer' %}" style="color:#fff">Website viewer</a></li>
+                <li><a href="{% url 'logout' %}" style="color:#fff">Logout</a></li>
+              </ul>
+            </li>
+      {% endif %}
+            <li class="dropdown" >
+              <a style="color:#fff" class="dropdown-toggle" role="button" aria-expanded="false" aria-haspopup="true" href="#" data-toggle="dropdown">Article<span class="caret"></span></a>
+              <ul class="dropdown-menu text-white" style="background:#660033">
+                <li><a href="{% url 'tips' %}" style="color:#fff">Tips & Tricks</a></li>
+                <li><a href="#" style="color:#fff">About</a></li>
+                <li class="divider" role="separator"></li>
+                <li class="dropdown-header" style="color:#fff"><i>Language</i></li>
+                <li><a href="#" style="color:#fff">English</a></li>
+                <li><a href="#" style="color:#fff">Afaan Oromoo</a></li>
+                <li><a href="#" style="color:#fff">Amharic</a></li>
+              </ul>
+          </div>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>

@@ -1,0 +1,21 @@
+{% extends 'blogone/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="col-md-8"  style="margin-top:60px;">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Add New Post</div>
+            <div class="panel-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-success">Post</button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}

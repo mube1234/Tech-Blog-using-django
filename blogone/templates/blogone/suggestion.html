@@ -1,0 +1,34 @@
+{% extends 'blogone/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top:60px">
+        <div class="col-sm-5">
+             {% if messages %}
+                 <div>
+
+                         {% for message in messages %}
+
+                                      <div class="alert alert-success left-icon-alert" role="alert">
+                                       <strong>Done!</strong>
+                                        {{message}}  <a href="{% url 'home' %}">back to home</a></h2>
+                                       </div>
+
+                            {% endfor %}
+                  </div>
+            {% endif %}
+
+
+              <div class="panel  panel-body">
+               <form action="{% url 'suggestion' %}" class="form-group" method="post">
+                   <p><i>Your suggestion here</i></p>
+                 {% csrf_token %}
+                     {{form|crispy}}
+                 <button class="btn btn-info" type="submit" style="float:right">Send</button>
+             </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
