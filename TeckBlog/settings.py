@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK='bootstrap3'
 MEDIA_URL = '/images/'
 
-STATIC_ROOT = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'),]
 
@@ -134,4 +134,4 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'blogone/static/images')
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Activate Django-Heroku.
-django_heroku.settings(locals()
+django_heroku.settings(locals())
