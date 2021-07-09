@@ -27,31 +27,31 @@ def post_listing(request):
     tips_post = paginator3.get_page(page)
     recently_posted = paginator4.get_page(page)
 
-    #for ip address
-    def get_ip(request):
-        address=request.META.get('HTTP_X_FORWARDED_FOR')
-        if address:
-            ip=address.split(',').[0]
-        else:
-            ip=request.META.get('REMOTE_ADDR')
-        return ip
-    ip=get_ip(request)
-    u=User(user=ip)
-    result=User.objects.filter(Q(user__icontains=ip))
-    if len(result)==1:
-        print("user exist")
-    elif len(result)>1:
-        print("user exist more")
-    else:
-        u.save()
-        print("user is unique")
-    count=User.objects.all().count()
+    # #for ip address
+    # def get_ip(request):
+    #     address=request.META.get('HTTP_X_FORWARDED_FOR')
+    #     if address:
+    #         ip=address.split(',').[0]
+    #     else:
+    #         ip=request.META.get('REMOTE_ADDR')
+    #     return ip
+    # ip=get_ip(request)
+    # u=User(user=ip)
+    # result=User.objects.filter(Q(user__icontains=ip))
+    # if len(result)==1:
+    #     print("user exist")
+    # elif len(result)>1:
+    #     print("user exist more")
+    # else:
+    #     u.save()
+    #     print("user is unique")
+    # count=User.objects.all().count()
     print("total count is",count)
     context={'posts': post,
              'comsec_posts':comsec_post,
              'tips_posts':tips_post,
              'recent_posts':recently_posted,
-             'count':count}
+             }
     return render(request, 'blogone/index.html',context )
 class PostListView(ListView):
     model=Post
