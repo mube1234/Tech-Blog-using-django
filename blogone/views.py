@@ -31,7 +31,7 @@ def post_listing(request):
     def get_ip(request):
         address=request.META.get('HTTP_X_FORWARDED_FOR')
         if address:
-            ip=address.split(',').strip()
+            ip=address.split(';').strip()
         else:
             ip=request.META.get('REMOTE_ADDR')
         return ip
