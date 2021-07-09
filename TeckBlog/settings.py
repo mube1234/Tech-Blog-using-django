@@ -26,7 +26,7 @@ SECRET_KEY = '6y--z(d%bb1xx3&wu=q4y6yrj&f7zh*cui(n21h2#k#^0jfg3i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['tecktimes.heroku.com']
+ALLOWED_HOSTS = ['https://tecktimes.herokuapp.com/']
 
 
 # Application definition
@@ -124,9 +124,9 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK='bootstrap3'
 MEDIA_URL = '/images/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'),]
+# STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'),]
 
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'blogone/static/images')
