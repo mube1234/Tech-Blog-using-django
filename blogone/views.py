@@ -144,7 +144,6 @@ def loginView(request):
                 return redirect('home')
             else:
                 messages.info(request,'Username or password is incorrect')
-.
         context={}
         return render(request,'blogone/login.html',context)
 @login_required(login_url='login')
