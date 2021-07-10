@@ -46,7 +46,7 @@ def post_listing(request):
     #     u.save()
     #     print("user is unique")
     # count=User.objects.all().count()
-    print("total count is",count)
+    # print("total count is",count)
     context={'posts': post,
              'comsec_posts':comsec_post,
              'tips_posts':tips_post,
@@ -144,7 +144,7 @@ def loginView(request):
                 return redirect('home')
             else:
                 messages.info(request,'Username or password is incorrect')
-
+.
         context={}
         return render(request,'blogone/login.html',context)
 @login_required(login_url='login')
