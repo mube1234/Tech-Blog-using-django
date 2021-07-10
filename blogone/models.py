@@ -2,12 +2,15 @@ from django.contrib.auth.models import User
 
 from django.db import models
 from django.urls import reverse
+from ckeditor.fields import RichTextField
+
 
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    content = models.TextField(null=True, blank=True)
+    content = RichTextField(blank=True,null=True)
+    # content = models.TextField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     post_image = models.ImageField(null=True, blank=True)

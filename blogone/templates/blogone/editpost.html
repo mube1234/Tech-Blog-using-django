@@ -9,6 +9,7 @@
                    <center> <a href="" style="text-decoration:none">  <h3>Edit Post</h3></a></center>
                       <form action="" method="post" enctype="multipart/form-data">
                          {% csrf_token %}
+                            {{form.media}}
                            {{form.as_p}}<br>
                            <button  type="submit" name="add" class="btn btn-info">Update</button>
                         </form>
