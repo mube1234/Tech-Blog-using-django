@@ -65,7 +65,7 @@
               <p  class="text-muted">By {{comsec_post.author.get_full_name}}
               <small class="text-muted" style="float:right"><i class="glyphicon glyphicon-calendar"></i> {{comsec_post.date_created|date:"F d, Y"}}</small></p>
              <p> <a href="{% url 'post_detail' comsec_post.id %}" style="font-family:serif"><b>{{comsec_post.title}}</b></a></p>
-             <p>{{comsec_post.content|linebreaksbr|slice:":400"}}</p>
+             <p>{{comsec_post.content|safe|linebreaksbr|slice:":400"}}</p>
              <a href="{% url 'post_detail' comsec_post.id %}">
                    <div class="panel-footer">
                        <div class="pull-left">Read More</div>

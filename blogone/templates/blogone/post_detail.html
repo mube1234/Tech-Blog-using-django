@@ -18,7 +18,7 @@
                         <p>no image</p>
                     {% endif %}
 
-            <p class="article-content">{{post.content}}</p>
+            <p class="article-content">{{post.content|safe}}</p>
                   {% if post.author == user %}
                   <b> <a class="" href="{% url 'editpost' post.id %}"><span class="glyphicon glyphicon-edit" ></span> Edit</a></b>
                    <b><a class="postdelete" style="margin-left:50px" href="{% url 'deletepost' post.id %}"><span class="glyphicon glyphicon-remove-circle" ></span> Delete</a></b>
