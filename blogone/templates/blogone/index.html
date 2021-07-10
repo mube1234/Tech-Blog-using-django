@@ -16,7 +16,7 @@
         <p style="padding:5px;" class="text-muted"><i>By {{post.author.get_full_name}}</i>
                 <small class="text-muted" style="float:right;"><i class="glyphicon glyphicon-calendar"></i> {{post.date_created|date:"F d, Y"}}</small></p>
        <p> <a href="{% url 'post_detail' post.id %}" style="font-family:serif"><b>{{post.title}}</b></a></p>
-        <p>{{post.content|linebreaksbr|slice:":200"}}...</p>
+        <p>{{post.content|safe|linebreaksbr|slice:":200"}}...</p>
         <a href="{% url 'post_detail' post.id %}">
                    <div class="panel-footer">
                        <div class="pull-left">Read More</div>
