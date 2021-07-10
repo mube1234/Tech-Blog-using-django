@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
-
+import socket
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,11 +24,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6y--z(d%bb1xx3&wu=q4y6yrj&f7zh*cui(n21h2#k#^0jfg3i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = False
 
 ALLOWED_HOSTS = ['tecktimes.herokuapp.com']
 
 
+
+if socket.gethostname() == "server_name":
+    DEBUG = False
+    ALLOWED_HOSTS = ['tecktimes.herokuapp.com']
+    
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 # Application definition
 
 INSTALLED_APPS = [
@@ -119,22 +127,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -150,7 +142,10 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static')]
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'blogone/static/images')
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+
