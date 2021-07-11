@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
-import socket
+import dj_database_url
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,19 +25,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6y--z(d%bb1xx3&wu=q4y6yrj&f7zh*cui(n21h2#k#^0jfg3i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+DEBUG = False
 
-# ALLOWED_HOSTS = ['tecktimes.herokuapp.com']
+ALLOWED_HOSTS = ['tecktimes.herokuapp.com']
 
 
-
-if socket.gethostname() == "server_name":
-    DEBUG = False
-    ALLOWED_HOSTS = ['tecktimes.herokuapp.com']
-    
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 # Application definition
 
 INSTALLED_APPS = [
@@ -148,4 +141,36 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': ('%(asctime)s [%(process)d] [%(levelname)s] ' +
+                       'pathname=%(pathname)s lineno=%(lineno)s ' +
+                       'funcname=%(funcName)s %(message)s'),
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        }
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'testlogger': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        }
+    }
+}
 
